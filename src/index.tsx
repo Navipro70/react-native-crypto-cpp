@@ -1,5 +1,10 @@
-import Cryptopp from './NativeCryptopp';
+import NativeCryptopp from './NativeCryptopp';
 
-export function multiply(a: number, b: number): number {
-  return Cryptopp.multiply(a, b);
+export function quickSort(array: number[]): number[] {
+  return NativeCryptopp.quickSort(array);
 }
+
+export function md2(input: string): string {
+  return NativeCryptopp.md2(input);
+}
+

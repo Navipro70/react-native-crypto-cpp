@@ -1,18 +1,18 @@
-# react-native-cryptopp
+# react-native-cryptopp-cpp
 
 Cryptopp implementation in react native as C++ module
 
 ## Installation
 
 ```sh
-npm install react-native-cryptopp
+npm install react-native-cryptopp-cpp
 ```
 
 ## Usage
 
 
 ```js
-import { multiply } from 'react-native-cryptopp';
+import { multiply } from 'react-native-cryptopp-cpp';
 
 // ...
 

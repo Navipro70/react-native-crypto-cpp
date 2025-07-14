@@ -62,6 +62,12 @@ android {
       ]
     }
   }
+
+  externalNativeBuild {
+    cmake {
+      path "CMakeLists.txt"
+    }
+  }
 }
 
 repositories {
@@ -78,6 +84,6 @@ dependencies {
 
 react {
   jsRootDir = file("../src/")
-  libraryName = "Cryptopp"
+  libraryName = "NativeCryptopp"
   codegenJavaPackageName = "com.cryptopp"
 }

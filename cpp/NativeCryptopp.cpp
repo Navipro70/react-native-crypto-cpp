@@ -1,4 +1,12 @@
-#include "NativeSampleModule.h"
+//
+//  NativeCryptopp.h
+//  react-native-cryptopp-cpp
+//
+//  Created by Dmitry Matatov on 12.07.2025.
+//
+
+#include "NativeCryptopp.h"
+#include "HashAlgorithms.h"
 
 #include <algorithm>
 #include <vector>
@@ -12,8 +20,8 @@ void quickSortInPlaceHelper(
     int high);
 int partitionInPlace(jsi::Runtime& rt, jsi::Array& array, int low, int high);
 
-NativeSampleModule::NativeSampleModule(std::shared_ptr<CallInvoker> jsInvoker)
-    : NativeSampleModuleCxxSpec(std::move(jsInvoker)) {}
+NativeCryptopp::NativeCryptopp(std::shared_ptr<CallInvoker> jsInvoker)
+    : NativeCryptoppCxxSpec(std::move(jsInvoker)) {}
 
 int partition(std::vector<double>& arr, int low, int high) {
   double pivot = arr[high];
@@ -37,7 +45,7 @@ void quickSortHelper(std::vector<double>& arr, int low, int high) {
   }
 }
 
-jsi::Array NativeSampleModule::quickSort(jsi::Runtime& rt, jsi::Array array) {
+jsi::Array NativeCryptopp::quickSort(jsi::Runtime& rt, jsi::Array array) {
   std::vector<double> numbers;
 
   size_t length = array.length(rt);
@@ -94,11 +102,17 @@ int partitionInPlace(jsi::Runtime& rt, jsi::Array& array, int low, int high) {
   return i + 1;
 }
 
-void NativeSampleModule::quickSortInPlace(jsi::Runtime& rt, jsi::Array array) {
+void NativeCryptopp::quickSortInPlace(jsi::Runtime& rt, jsi::Array array) {
   int length = static_cast<int>(array.length(rt));
   if (length > 1) {
     quickSortInPlaceHelper(rt, array, 0, length - 1);
   }
+}
+
+jsi::String NativeCryptopp::md2(jsi::Runtime& rt, jsi::String input) {
+  std::string inputStr = input.utf8(rt);
+  std::string result = CryptoppHelpers::md2(inputStr);
+  return jsi::String::createFromUtf8(rt, result);
 }
 
 } // namespace facebook::react

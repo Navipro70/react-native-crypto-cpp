@@ -9,24 +9,13 @@ import java.util.HashMap
 
 class CryptoppPackage : BaseReactPackage() {
   override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? {
-    return if (name == CryptoppModule.NAME) {
-      CryptoppModule(reactContext)
-    } else {
-      null
-    }
+    return null
   }
 
   override fun getReactModuleInfoProvider(): ReactModuleInfoProvider {
     return ReactModuleInfoProvider {
       val moduleInfos: MutableMap<String, ReactModuleInfo> = HashMap()
-      moduleInfos[CryptoppModule.NAME] = ReactModuleInfo(
-        CryptoppModule.NAME,
-        CryptoppModule.NAME,
-        false,  // canOverrideExistingModule
-        false,  // needsEagerInit
-        false,  // isCxxModule
-        true // isTurboModule
-      )
+
       moduleInfos
     }
   }

@@ -10286,9 +10286,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-cryptopp-example@workspace:example":
+"react-native-cryptopp-cpp-example@workspace:example":
   version: 0.0.0-use.local
-  resolution: "react-native-cryptopp-example@workspace:example"
+  resolution: "react-native-cryptopp-cpp-example@workspace:example"
   dependencies:
     "@babel/core": ^7.25.2
     "@babel/preset-env": ^7.25.3
@@ -10307,9 +10307,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"react-native-cryptopp@workspace:.":
+"react-native-cryptopp-cpp@workspace:.":
   version: 0.0.0-use.local
-  resolution: "react-native-cryptopp@workspace:."
+  resolution: "react-native-cryptopp-cpp@workspace:."
   dependencies:
     "@commitlint/config-conventional": ^19.6.0
     "@eslint/compat": ^1.2.7
