@@ -1,5 +1,6 @@
 #include "HashAlgorithms.h"
 #include "uuid.h"
+#include <algorithm>
 
 #define CRYPTOPP_ENABLE_NAMESPACE_WEAK 1
 #include "cryptopp/md2.h"
@@ -87,12 +88,16 @@ namespace CryptoppHelpers {
         return digest;
     }
 
-    std::string uuidv4() {
+    std::string uuidv4(bool isUpperCase) {
         static std::random_device rd;
         static std::mt19937 eng{rd()};
         static uuids::uuid_random_generator gen{eng};
         uuids::uuid id = gen();
-        return uuids::to_string(id);
+        std::string result = uuids::to_string(id);
+        if (isUpperCase) {
+            std::transform(result.begin(), result.end(), result.begin(), ::toupper);
+        }
+        return result;
     }
 
 }

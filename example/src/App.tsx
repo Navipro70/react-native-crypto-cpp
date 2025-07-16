@@ -18,7 +18,7 @@ export default function App() {
     setMd5Result(md5(text));
     setSha256Result(sha256(text));
     setHmacSha256Result(hmacSha256(text, 'key'));
-    setUuidResult(uuidv4());
+    setUuidResult(uuidv4(true));
   };
 
   return (

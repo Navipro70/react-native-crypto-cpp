@@ -24,7 +24,7 @@ class NativeCryptopp
   jsi::String md5(jsi::Runtime& rt, jsi::String input);
   jsi::String sha256(jsi::Runtime& rt, jsi::String input);
   jsi::String hmacSha256(jsi::Runtime& rt, jsi::String input, jsi::String key);
-  jsi::String uuidv4(jsi::Runtime& rt);
+  jsi::String uuidv4(jsi::Runtime& rt, bool isUpperCase);
   
 };
 

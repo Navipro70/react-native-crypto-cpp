@@ -47,8 +47,8 @@ namespace facebook::react {
     return jsi::String::createFromUtf8(rt, result);
   }
 
-  jsi::String NativeCryptopp::uuidv4(jsi::Runtime& rt) {
-    std::string result = CryptoppHelpers::uuidv4();
+  jsi::String NativeCryptopp::uuidv4(jsi::Runtime& rt, bool isUpperCase) {
+    std::string result = CryptoppHelpers::uuidv4(isUpperCase);
     return jsi::String::createFromUtf8(rt, result);
   }
 

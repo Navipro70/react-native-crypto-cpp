@@ -19,7 +19,7 @@ import { md2, md4, md5, sha256, hmacSha256, uuidv4 } from 'react-native-cryptopp
 
 // Example usage
 const hash = md5('your input string');
-const uuid = uuidv4();
+const uuid = uuidv4(true); // returns UUID in uppercase
 ```
 
 ## Available Functions
@@ -31,7 +31,7 @@ const uuid = uuidv4();
 | `md5`        | Computes MD5 hash of the input       | `input: string`             | `string`  |
 | `sha256`     | Computes SHA-256 hash of the input   | `input: string`             | `string`  |
 | `hmacSha256` | Computes HMAC-SHA-256 of the input   | `input: string, key: string`| `string`  |
-| `uuidv4`     | Generates a UUID v4                  | None                        | `string`  |
+| `uuidv4`     | Generates a UUID v4                  | `isUpperCase?: boolean`      | `string`  |
 
 ## Contributing
 

@@ -7,7 +7,7 @@ export interface Spec extends TurboModule {
   md5(input: string): string;
   sha256(input: string): string;
   hmacSha256(input: string, key: string): string;
-  uuidv4(): string;
+  uuidv4(isUpperCase?: boolean): string;
 }
 
 export default TurboModuleRegistry.getEnforcing<Spec>('NativeCryptopp');

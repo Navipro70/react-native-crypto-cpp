@@ -20,8 +20,8 @@ export function hmacSha256(input: string, key: string): string {
   return NativeCryptopp.hmacSha256(input, key);
 }
 
-export function uuidv4(): string {
-  return NativeCryptopp.uuidv4();
+export function uuidv4(isUpperCase: boolean = false): string {
+  return NativeCryptopp.uuidv4(isUpperCase);
 }
 
 
