@@ -4,3 +4,6 @@
 [submodule "cryptopp-cmake"]
 	path = cryptopp-cmake
 	url = https://github.com/abdes/cryptopp-cmake.git
+[submodule "stduuid"]
+	path = stduuid
+	url = https://github.com/mariusbancila/stduuid

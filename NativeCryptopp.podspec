@@ -27,13 +27,16 @@ Pod::Spec.new do |s|
   s.source_files = [
     "ios/**/*.{h,m,mm,cpp}",
     "cpp/**/*.{hpp,cpp,c,h}",
-    "cryptopp/**/*.{h,cpp}"
+    "cryptopp/**/*.{h,cpp}",
+    "stduuid/**/*.{h,cpp}"
   ]
   s.exclude_files = [
     "cryptopp/TestPrograms/**/*",
     "cryptopp/TestData/**/*",
     "cryptopp/TestVectors/**/*",
     "cryptopp/TestScripts/**/*",
+
+    "stduuid/test/**/*"
   ]
   s.header_mappings_dir = '.'
   s.public_header_files = 'cryptopp/**/*.h'

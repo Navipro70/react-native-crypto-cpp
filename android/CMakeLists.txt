@@ -12,6 +12,9 @@ set(CRYPTOPP_DISABLE_ASM   ON  CACHE BOOL "")
 add_subdirectory("${PROJECT_ROOT}/cryptopp-cmake"       # исходники сабмодуля
                  "${CMAKE_BINARY_DIR}/cryptopp-cmake")
 
+add_subdirectory("${PROJECT_ROOT}/stduuid"
+                 "${CMAKE_BINARY_DIR}/stduuid")
+
 file(GLOB RN_SOURCE_FILES "${PROJECT_ROOT}/cpp/*.cpp" "${PROJECT_ROOT}/cpp/*.h")
 add_library(react-native-cryptopp-cpp STATIC
   ${RN_SOURCE_FILES}
@@ -23,6 +26,7 @@ target_include_directories(react-native-cryptopp-cpp PUBLIC
 
 target_link_libraries(react-native-cryptopp-cpp
   cryptopp::cryptopp
+  stduuid
   jsi
   reactnative
   react_codegen_RNCryptoppSpec

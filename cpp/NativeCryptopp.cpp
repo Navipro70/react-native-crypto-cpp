@@ -13,106 +13,43 @@
 
 namespace facebook::react {
 
-void quickSortInPlaceHelper(
-    jsi::Runtime& rt,
-    jsi::Array& array,
-    int low,
-    int high);
-int partitionInPlace(jsi::Runtime& rt, jsi::Array& array, int low, int high);
+  NativeCryptopp::NativeCryptopp(std::shared_ptr<CallInvoker> jsInvoker)
+      : NativeCryptoppCxxSpec(std::move(jsInvoker)) {}
 
-NativeCryptopp::NativeCryptopp(std::shared_ptr<CallInvoker> jsInvoker)
-    : NativeCryptoppCxxSpec(std::move(jsInvoker)) {}
-
-int partition(std::vector<double>& arr, int low, int high) {
-  double pivot = arr[high];
-  int i = (low - 1);
-
-  for (int j = low; j <= high - 1; j++) {
-    if (arr[j] < pivot) {
-      i++;
-      std::swap(arr[i], arr[j]);
-    }
-  }
-  std::swap(arr[i + 1], arr[high]);
-  return (i + 1);
-}
-
-void quickSortHelper(std::vector<double>& arr, int low, int high) {
-  if (low < high) {
-    int pi = partition(arr, low, high);
-    quickSortHelper(arr, low, pi - 1);
-    quickSortHelper(arr, pi + 1, high);
-  }
-}
-
-jsi::Array NativeCryptopp::quickSort(jsi::Runtime& rt, jsi::Array array) {
-  std::vector<double> numbers;
-
-  size_t length = array.length(rt);
-  numbers.reserve(length);
-
-  for (size_t i = 0; i < length; i++) {
-    auto value = array.getValueAtIndex(rt, i);
-    if (value.isNumber()) {
-      numbers.push_back(value.asNumber());
-    }
+  jsi::String NativeCryptopp::md2(jsi::Runtime& rt, jsi::String input) {
+    std::string inputStr = input.utf8(rt);
+    std::string result = CryptoppHelpers::md2(inputStr);
+    return jsi::String::createFromUtf8(rt, result);
   }
 
-  if (!numbers.empty()) {
-    quickSortHelper(numbers, 0, static_cast<int>(numbers.size()) - 1);
+  jsi::String NativeCryptopp::md4(jsi::Runtime& rt, jsi::String input) {
+    std::string inputStr = input.utf8(rt);
+    std::string result = CryptoppHelpers::md4(inputStr);
+    return jsi::String::createFromUtf8(rt, result);
   }
 
-  jsi::Array result = jsi::Array(rt, numbers.size());
-  for (size_t i = 0; i < numbers.size(); i++) {
-    result.setValueAtIndex(rt, i, jsi::Value(numbers[i]));
+  jsi::String NativeCryptopp::md5(jsi::Runtime& rt, jsi::String input) {
+    std::string inputStr = input.utf8(rt);
+    std::string result = CryptoppHelpers::md5(inputStr);
+    return jsi::String::createFromUtf8(rt, result);
   }
 
-  return result;
-}
-
-void quickSortInPlaceHelper(
-    jsi::Runtime& rt,
-    jsi::Array& array,
-    int low,
-    int high) {
-  if (low < high) {
-    int pi = partitionInPlace(rt, array, low, high);
-    quickSortInPlaceHelper(rt, array, low, pi - 1);
-    quickSortInPlaceHelper(rt, array, pi + 1, high);
-  }
-}
-
-int partitionInPlace(jsi::Runtime& rt, jsi::Array& array, int low, int high) {
-  double pivot = array.getValueAtIndex(rt, high).asNumber();
-  int i = low - 1;
-
-  for (int j = low; j < high; j++) {
-    if (array.getValueAtIndex(rt, j).asNumber() < pivot) {
-      i++;
-      jsi::Value temp = array.getValueAtIndex(rt, i);
-      array.setValueAtIndex(rt, i, array.getValueAtIndex(rt, j));
-      array.setValueAtIndex(rt, j, std::move(temp));
-    }
+  jsi::String NativeCryptopp::sha256(jsi::Runtime& rt, jsi::String input) {
+    std::string inputStr = input.utf8(rt);
+    std::string result = CryptoppHelpers::sha256(inputStr);
+    return jsi::String::createFromUtf8(rt, result);
   }
 
-  jsi::Value temp = array.getValueAtIndex(rt, i + 1);
-  array.setValueAtIndex(rt, i + 1, array.getValueAtIndex(rt, high));
-  array.setValueAtIndex(rt, high, std::move(temp));
-
-  return i + 1;
-}
-
-void NativeCryptopp::quickSortInPlace(jsi::Runtime& rt, jsi::Array array) {
-  int length = static_cast<int>(array.length(rt));
-  if (length > 1) {
-    quickSortInPlaceHelper(rt, array, 0, length - 1);
+  jsi::String NativeCryptopp::hmacSha256(jsi::Runtime& rt, jsi::String input, jsi::String key) {
+    std::string inputStr = input.utf8(rt);
+    std::string keyStr = key.utf8(rt);
+    std::string result = CryptoppHelpers::hmacSha256(inputStr, keyStr);
+    return jsi::String::createFromUtf8(rt, result);
   }
-}
 
-jsi::String NativeCryptopp::md2(jsi::Runtime& rt, jsi::String input) {
-  std::string inputStr = input.utf8(rt);
-  std::string result = CryptoppHelpers::md2(inputStr);
-  return jsi::String::createFromUtf8(rt, result);
-}
+  jsi::String NativeCryptopp::uuidv4(jsi::Runtime& rt) {
+    std::string result = CryptoppHelpers::uuidv4();
+    return jsi::String::createFromUtf8(rt, result);
+  }
 
 } // namespace facebook::react
