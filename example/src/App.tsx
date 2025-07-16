@@ -1,6 +1,7 @@
 import { Text, View, StyleSheet, Button, TextInput, ScrollView } from 'react-native';
 import { useState } from 'react';
 import { md2, md4, md5, sha256, hmacSha256, uuidv4 } from 'react-native-cryptopp-cpp';
+import BenchmarkModal from './BenchmarkModal/BenchmarkModal';
 
 export default function App() {
   const [input, setInput] = useState('');
@@ -10,6 +11,7 @@ export default function App() {
   const [sha256Result, setSha256Result] = useState('');
   const [hmacSha256Result, setHmacSha256Result] = useState('');
   const [uuidResult, setUuidResult] = useState('');
+  const [showBenchmark, setShowBenchmark] = useState(false);
 
   const handleChangeText = (text: string) => {
     setInput(text);
@@ -23,6 +25,14 @@ export default function App() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Open Benchmark"
+          onPress={() => setShowBenchmark(true)}
+          color="#007AFF"
+        />
+      </View>
+      
       <TextInput
         style={styles.input}
         placeholder="Enter text"
@@ -35,6 +45,11 @@ export default function App() {
       <Text>SHA256: {sha256Result}{`\n`}</Text>
       <Text>HMAC SHA256: {hmacSha256Result}{`\n`}</Text>
       <Text>UUID v4: {uuidResult}{`\n`}</Text>
+
+      <BenchmarkModal
+        visible={showBenchmark}
+        onClose={() => setShowBenchmark(false)}
+      />
     </ScrollView>
   );
 }
@@ -45,6 +60,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 20,
     backgroundColor: '#f0f0f0',
+  },
+  buttonContainer: {
+    marginBottom: 20,
   },
   input: {
     height: 40,

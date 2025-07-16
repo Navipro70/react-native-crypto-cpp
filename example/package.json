@@ -10,8 +10,10 @@
         "build:ios": "react-native build-ios --mode Debug"
     },
     "dependencies": {
+        "js-sha256": "^0.11.1",
         "react": "19.0.0",
-        "react-native": "0.79.2"
+        "react-native": "0.79.2",
+        "react-native-uuid": "^2.0.3"
     },
     "devDependencies": {
         "@babel/core": "^7.25.2",
