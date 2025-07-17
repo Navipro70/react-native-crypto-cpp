@@ -1,13 +1,29 @@
+<div align="center">
+
 # react-native-cryptopp-cpp
 
-Cryptopp implementation in React Native as a C++ module. This library provides cryptographic functions such as hashing and UUID generation.
+**The fastest native implementation of Cryptopp++ functions**
+
+</div>
+
+- **Cryptopp++** is a native C++ library that provides a comprehensive suite of cryptographic algorithms and utilities for secure data processing
+- **react-native-cryptopp-cpp** is a React Native port of the Cryptopp++ library, implemented using C++, JSI (JavaScript Interface), and Turbo Modules for maximum performance
+
+## Features
+
+- High performance - everything is written in C++
+- Uses JSI and C++ TurboModules instead of the "old" Bridge
+- Super lightweight - adds only ~40KB to your app bundle
+- Fully synchronous calls - no async/await, no Promises, no Bridge
+- iOS, Android and Expo support
 
 ## Installation
 
 To install the library, use the following command:
 
 ```sh
-npm install react-native-cryptopp-cpp
+yarn add react-native-cryptopp-cpp
+cd ios && pod install
 ```
 
 ## Usage
@@ -35,7 +51,13 @@ const uuid = uuidv4(true); // returns UUID in uppercase
 
 ## Contributing
 
+If you need any specific function from Cryptopp++, please request it through an issue and it will implemented in the nearest time, or feel free to open a PR and it will be added to the library promptly.
+
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+
+## Limitations
+
+- This package supports only the **New Architecture** (Fabric + TurboModules)
 
 ## License
 
