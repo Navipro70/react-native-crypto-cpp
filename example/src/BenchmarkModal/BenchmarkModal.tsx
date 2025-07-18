@@ -1,8 +1,23 @@
-import { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Alert, Modal } from 'react-native';
-import { md2, md4, md5, sha256, hmacSha256, uuidv4 } from 'react-native-cryptopp-cpp';
-import uuid from 'react-native-uuid';
 import { sha256 as jsSha256 } from 'js-sha256';
+import { useState } from 'react';
+import {
+  Alert,
+  Modal,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {
+  hmacSha256,
+  md2,
+  md4,
+  md5,
+  sha256,
+  uuidv4,
+} from 'react-native-cryptopp-cpp';
+import uuid from 'react-native-uuid';
 
 interface BenchmarkResult {
   functionName: string;
@@ -28,7 +43,10 @@ interface BenchmarkModalProps {
   onClose: () => void;
 }
 
-export default function BenchmarkModal({ visible, onClose }: BenchmarkModalProps) {
+export default function BenchmarkModal({
+  visible,
+  onClose,
+}: BenchmarkModalProps) {
   const [results, setResults] = useState<BenchmarkResult[]>([]);
   const [isRunning, setIsRunning] = useState(false);
 
@@ -44,51 +62,51 @@ export default function BenchmarkModal({ visible, onClose }: BenchmarkModalProps
   const runBenchmarks = async () => {
     setIsRunning(true);
     setResults([]);
-    
+
     const testData = 'test data for benchmarking';
     const hmacKey = 'benchmark-key';
-    
+
     const functions = [
-      { 
-        name: 'uuid', 
+      {
+        name: 'uuid',
         cryptoppFn: () => uuidv4(true),
         comparisonFn: () => uuid.v4(),
-        comparisonName: 'react-native-uuid'
+        comparisonName: 'react-native-uuid',
       },
-      { 
-        name: 'sha256', 
+      {
+        name: 'sha256',
         cryptoppFn: () => sha256(testData),
         comparisonFn: () => jsSha256(testData),
-        comparisonName: 'js-sha256'
+        comparisonName: 'js-sha256',
       },
-      { 
-        name: 'md2', 
+      {
+        name: 'md2',
         cryptoppFn: () => md2(testData),
         comparisonFn: null,
-        comparisonName: null
+        comparisonName: null,
       },
-      { 
-        name: 'md4', 
+      {
+        name: 'md4',
         cryptoppFn: () => md4(testData),
         comparisonFn: null,
-        comparisonName: null
+        comparisonName: null,
       },
-      { 
-        name: 'md5', 
+      {
+        name: 'md5',
         cryptoppFn: () => md5(testData),
         comparisonFn: null,
-        comparisonName: null
+        comparisonName: null,
       },
-      { 
-        name: 'hmacSha256', 
+      {
+        name: 'hmacSha256',
         cryptoppFn: () => hmacSha256(testData, hmacKey),
         comparisonFn: null,
-        comparisonName: null
+        comparisonName: null,
       },
     ];
 
     const benchmarkResults: BenchmarkResult[] = [];
-    
+
     for (const func of functions) {
       try {
         const cryptoppResults = {
@@ -141,43 +159,64 @@ export default function BenchmarkModal({ visible, onClose }: BenchmarkModalProps
       <Text style={styles.functionTitle}>
         {result.functionName.toUpperCase()}
         {result.comparisonName && (
-          <Text style={styles.comparisonSubtitle}> (cpp vs {result.comparisonName})</Text>
+          <Text style={styles.comparisonSubtitle}>
+            {' '}
+            (cpp vs {result.comparisonName})
+          </Text>
         )}
       </Text>
-      
+
       <View style={styles.table}>
         <View style={styles.tableHeader}>
           <Text style={[styles.tableCell, styles.headerCell]}>Iterations</Text>
-          <Text style={[styles.tableCell, styles.headerCell]}>Crypto++ (cpp)</Text>
+          <Text style={[styles.tableCell, styles.headerCell]}>
+            Crypto++ (cpp)
+          </Text>
           {result.comparison && (
             <>
-              <Text style={[styles.tableCell, styles.headerCell]}>{result.comparisonName}</Text>
-              <Text style={[styles.tableCell, styles.headerCell]}>Speed Ratio</Text>
+              <Text style={[styles.tableCell, styles.headerCell]}>
+                {result.comparisonName}
+              </Text>
+              <Text style={[styles.tableCell, styles.headerCell]}>
+                Speed Ratio
+              </Text>
             </>
           )}
         </View>
 
         {['x1', 'x10', 'x100', 'x1000', 'x10000'].map((iteration) => (
           <View key={iteration} style={styles.tableRow}>
-            <Text style={[styles.tableCell, styles.iterationLabel]}>{iteration}</Text>
+            <Text style={[styles.tableCell, styles.iterationLabel]}>
+              {iteration}
+            </Text>
             <Text style={[styles.tableCell, styles.cppTime]}>
-              {formatTime(result.cryptopp[iteration as keyof typeof result.cryptopp])}
+              {formatTime(
+                result.cryptopp[iteration as keyof typeof result.cryptopp]
+              )}
             </Text>
             {result.comparison ? (
               <>
                 <Text style={[styles.tableCell, styles.jsTime]}>
-                  {formatTime(result.comparison[iteration as keyof typeof result.comparison])}
+                  {formatTime(
+                    result.comparison[
+                      iteration as keyof typeof result.comparison
+                    ]
+                  )}
                 </Text>
                 <Text style={[styles.tableCell, styles.speedRatio]}>
                   {calculateSpeedRatio(
                     result.cryptopp[iteration as keyof typeof result.cryptopp],
-                    result.comparison[iteration as keyof typeof result.comparison]
+                    result.comparison[
+                      iteration as keyof typeof result.comparison
+                    ]
                   )}
                 </Text>
               </>
             ) : (
               <>
-                <Text style={[styles.tableCell, styles.noComparison]}>No comparison</Text>
+                <Text style={[styles.tableCell, styles.noComparison]}>
+                  No comparison
+                </Text>
                 <Text style={[styles.tableCell, styles.noComparison]}>-</Text>
               </>
             )}
@@ -200,10 +239,10 @@ export default function BenchmarkModal({ visible, onClose }: BenchmarkModalProps
             <Text style={styles.closeButtonText}>Close</Text>
           </TouchableOpacity>
         </View>
-        
+
         <ScrollView style={styles.container}>
           <Text style={styles.title}>Crypto++ Benchmark</Text>
-          
+
           <TouchableOpacity
             style={[styles.button, isRunning && styles.buttonDisabled]}
             onPress={runBenchmarks}

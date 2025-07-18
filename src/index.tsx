@@ -23,5 +23,3 @@ export function hmacSha256(input: string, key: string): string {
 export function uuidv4(isUpperCase: boolean = false): string {
   return NativeCryptopp.uuidv4(isUpperCase);
 }
-
-

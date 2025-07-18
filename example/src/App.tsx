@@ -1,6 +1,20 @@
-import { Text, View, StyleSheet, Button, TextInput, ScrollView } from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Button,
+  TextInput,
+  ScrollView,
+} from 'react-native';
 import { useState } from 'react';
-import { md2, md4, md5, sha256, hmacSha256, uuidv4 } from 'react-native-cryptopp-cpp';
+import {
+  md2,
+  md4,
+  md5,
+  sha256,
+  hmacSha256,
+  uuidv4,
+} from 'react-native-cryptopp-cpp';
 import BenchmarkModal from './BenchmarkModal/BenchmarkModal';
 
 export default function App() {
@@ -32,19 +46,37 @@ export default function App() {
           color="#007AFF"
         />
       </View>
-      
+
       <TextInput
         style={styles.input}
         placeholder="Enter text"
         value={input}
         onChangeText={handleChangeText}
       />
-      <Text>MD2: {md2Result}{`\n`}</Text>
-      <Text>MD4: {md4Result}{`\n`}</Text>
-      <Text>MD5: {md5Result}{`\n`}</Text>
-      <Text>SHA256: {sha256Result}{`\n`}</Text>
-      <Text>HMAC SHA256: {hmacSha256Result}{`\n`}</Text>
-      <Text>UUID v4: {uuidResult}{`\n`}</Text>
+      <Text>
+        MD2: {md2Result}
+        {`\n`}
+      </Text>
+      <Text>
+        MD4: {md4Result}
+        {`\n`}
+      </Text>
+      <Text>
+        MD5: {md5Result}
+        {`\n`}
+      </Text>
+      <Text>
+        SHA256: {sha256Result}
+        {`\n`}
+      </Text>
+      <Text>
+        HMAC SHA256: {hmacSha256Result}
+        {`\n`}
+      </Text>
+      <Text>
+        UUID v4: {uuidResult}
+        {`\n`}
+      </Text>
 
       <BenchmarkModal
         visible={showBenchmark}
