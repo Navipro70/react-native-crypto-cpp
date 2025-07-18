@@ -61,6 +61,8 @@ buck-out/
 android/app/libs
 android/keystores/debug.keystore
 
+.pnp.*
+
 # Yarn
 .yarn/*
 !.yarn/patches
@@ -68,6 +70,8 @@ android/keystores/debug.keystore
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+.yarnrc.yml
+*.log
 
 # Expo
 .expo/
@@ -85,4 +89,4 @@ android/generated
 # React Native Nitro Modules
 nitrogen/
 
-*.log
+*.log.yarnrc.yml
