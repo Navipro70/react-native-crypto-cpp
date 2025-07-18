@@ -1,6 +1,6 @@
 {
     "name": "react-native-cryptopp-cpp",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "description": "Cryptopp implementation in react native as C++ module",
     "main": "./lib/module/index.js",
     "types": "./lib/typescript/src/index.d.ts",
@@ -134,8 +134,7 @@
         "source": "src",
         "output": "lib",
         "targets": [
-            null,
-            [
+            "codegen", [
                 "module",
                 {
                     "esm": true
